@@ -2,7 +2,7 @@
 
 Technologies required
 
-Backend- Python3
+Backend- Python3, Flask framework, sqlite
 Frontend- HTML, CSS, jnja
 
 what is does?
