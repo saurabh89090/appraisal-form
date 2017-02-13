@@ -1,0 +1,72 @@
+{% extends "layout_prac3.html" %}
+
+  {% block title %} Home {% endblock %}
+  
+{% block body %}
+
+  <!-- Container (Navigational Bar) -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#home">
+          <img src="logo.png" class="img-circle" width=60px>
+        </a>
+      </div>
+      <div id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#people">PEOPLE</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="jumbotron">
+    <h1 id ="home">ZeMoSo Technologies</h1> 
+  </div>
+
+  <!-- Container (About US) -->
+  <div id="about" class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9">
+        <h2>ABOUT US</h2><br>
+        <h4>We get the right Job stories/User stories. We then build wireframes, hi-fidelity click thru prototypes</h4>
+        <p>Whether its a complex data analytics platform, an API or a mobile app. Our team brainstorms with your product management to flesh your concept to Job Stories/User stories along with wireframes. Our goal is to allow you to test your hypothesis.</p>
+      </div>
+      <div class="col-sm-3">
+        <span class="glyphicon glyphicon-signal logo"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container (Table) -->
+  <div class="container">
+    <table class="table table-bordered table-hover" id="people">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Employee ID</th>
+          <th>Designation</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td><a href="/prac4?id={{ row.empID }}" >{{ row.firstName }}</a></td>
+          <td>{{ row.lastName }}</td>
+          <td>{{ row.email }}</td>
+          <td>{{ row.empID }}</td>
+          <td>{{ row.designation }}</td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+
+  <footer id="footer">
+    <p>ZeMoSo technologies | All Rights Reserved</p>
+  </footer>
+  {% endblock %}

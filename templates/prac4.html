@@ -1,0 +1,121 @@
+{% extends "layout_prac4.html" %}
+
+  {% block title %}Personal Info{% endblock %}
+  
+{% block body %}
+<!--to store data of tasks-->
+<meta id="myTask" data="{{tasks|safe}}">
+<!-- Container (Navigational Bar) -11111-->
+<div class="container-fluid">
+  <div class="row">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button id="navbtn" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#home">
+          <img src="logo.png" class="img-circle" width=60px>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="http://ide50-saurabh89090.cs50.io:8080/">ABOUT</a></li>
+          <li><a href="http://ide50-saurabh89090.cs50.io:8080/">PEOPLE</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<div id="details">
+  <div class="container-fluid">
+      <div class="col-sm-4">
+        <form>
+        <fieldset>
+          <legend>Personal Info</legend>
+            <div class="form-group">
+              {% for info in row_personal %}
+              <label for="firstname">First Name :</label>
+              <input type="text" class="form-control" id="lastname" value='{{ info.firstName }}' disabled>
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last name:</label>
+              <input type="text" class="form-control" id="lastname" value='{{ info.lastName }}' disabled >
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" value='{{ info.email }}' disabled>
+            </div>
+            <div class="form-group">
+              <label for="employee-id">Employee ID :</label>
+              <input type="text" class="form-control" id="employee-id" value='{{ info.empID }}' disabled>
+            </div>
+            <div class="form-group">
+              <label for="designation">Designation:</label>
+              <input type="text" class="form-control" id="designation" value='{{ info.designation }}' disabled>
+              {% endfor %}
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="col-sm-8">
+        {% if errors %}
+        <div class="alert alert-danger">
+	      {{ errors }}
+        </div>
+        {% endif %}
+        <form action="/prac4?id={{row_personal[0].empID}}" method="POST">
+          <input name="empID" type="hidden" class="form-control" value="{{row_personal[0].empID}}">
+          <fieldset>
+            <legend>Task Info</legend>
+            
+            <table class="table table-bordered table-hover" id="people">
+              <thead >
+                <tr>
+                  <th><strong>Source</strong></th>
+                  <th><strong>Description</strong></th>
+                  <th><strong>Reported To</strong></th>
+                  <th><strong>Duration (days)</strong></th>
+                  <th><strong>Weightage</strong></th>
+                  <th><strong>Rating</strong></th>
+                </tr>
+              </thead>
+              <tbody id="task_row">
+                {% for task in row_tasks %}
+                  <tr >
+                    <td>{{ task.source }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.reportedTo }}</td>
+                    <td>{{ task.weightage }}</td>
+                    <td>{{ task.duration }}</td>
+                    <td>{{ task.rating }}</td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                  <td><input name="source" type="text" class="form-control" placeholder="source"></td>
+                  <td><input name="description" type="text" class="form-control" placeholder="Description"></td>
+                  <td><input name="reportto" type="text" class="form-control" placeholder="Reported To"></td>
+                  <td><input name="duration" type="text" class="form-control" placeholder="Duration" ></td>
+                  <td><input name="weightage" type="text" class="form-control" placeholder="Weightage" ></td>
+                  <td><input name="rating" type="text" class="form-control" placeholder="Rating" ></td>
+                </tr>
+              </tbody>
+            </table>
+            <button id="submit-btn" type="submit" class="btn btn-success">Submit</button>
+          </fieldset>
+        </form>
+        <!--<div id="add_button"><button class="btn btn-primary" onClick="add_row()">Add Task</button></div>-->
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+    <p>ZeMoSo technologies | All Rights Reserved</p>
+  </footer>
+  
+</div>
+<script type="text/javascript">
+  
+</script>
+{% endblock %}
